@@ -29,6 +29,8 @@ fi
 args=(
   "-it"
   "--network=host"
+  "--cgroup-manager" "cgroupfs"
+  "--events-backend" "file"
   "--rm"
   "--env" "BUILDKITE_BRANCH"
   "--env" "BUILDKITE_COMMIT"
@@ -49,7 +51,7 @@ if [[ "${BUILDKITE_PLUGIN_SMART_CI_MOUNT_SECRETS:-true}" =~ (true|on|1) ]] ; the
   )
 fi
 
-if [[ "${BUILDKITE_PLUGIN_SMART_CI_MOUNT_DOCKER:-true}" =~ (true|on|1) ]] ; then
+if [[ "${BUILDKITE_PLUGIN_SMART_CI_MOUNT_PODMAN:-true}" =~ (true|on|1) ]] ; then
   args+=(
     "--volume" "/var/lib/containers:/var/lib/containers:ro"
   )
